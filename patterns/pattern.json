@@ -1,0 +1,58 @@
+{
+  "patterns": [
+    {
+      "id": "NEXTJS_RCE_REVERSE_SHELL",
+      "enabled": true,
+      "severity": "critical",
+      "methods": ["POST"],
+      "match": {
+        "headers": ["multipart/form-data"],
+        "body_regex": [
+          "__proto__",
+          "constructor:constructor",
+          "process\\.mainModule\\.require",
+          "child_process",
+          "spawn\\("
+        ]
+      },
+      "action": "forward_to_llm",
+      "llm_profile": "linux_shell"
+    },
+
+    {
+      "id": "NEXTJS_RSC_REDIRECT_ABUSE",
+      "enabled": true,
+      "severity": "high",
+      "methods": ["POST"],
+      "match": {
+        "headers": ["multipart/form-data"],
+        "body_regex": [
+          "__proto__",
+          "resolved_model",
+          "NEXT_REDIRECT",
+          "constructor:constructor"
+        ]
+      },
+      "action": "forward_to_llm",
+      "llm_profile": "nodejs_shell"
+    },
+
+    {
+      "id": "PHP_INPUT_BASE64_RCE",
+      "enabled": true,
+      "severity": "critical",
+      "methods": ["POST"],
+      "match": {
+        "headers": ["application/x-www-form-urlencoded"],
+        "path_regex": ["php://input"],
+        "body_regex": [
+          "shell_exec",
+          "base64_decode\\s*\\(",
+          "[A-Za-z0-9+/=]{20,}"
+        ]
+      },
+      "action": "forward_to_llm",
+      "llm_profile": "linux_shell"
+    }
+  ]
+}

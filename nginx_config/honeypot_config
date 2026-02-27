@@ -1,0 +1,57 @@
+server {
+    listen 80;
+    server_name _;
+
+    client_max_body_size 50M;
+    access_log /var/log/nginx/honeypot_access.log honeypot_json;
+
+    # ===============================
+    # ROOT → redirect GUI
+    # ===============================
+    location = / {
+        return 302 /jasperserver/;
+    }
+
+    # ===============================
+    # STATIC GUI (GET only)
+    # ===============================
+    location /jasperserver/ {
+
+        # If NOT GET → send to python
+        limit_except GET {
+            proxy_pass http://127.0.0.1:5000;
+        }
+
+        root /var/www;
+        index login.html;
+        try_files $uri $uri/ /jasperserver/login.html;
+    }
+
+    # ===============================
+    # EVERYTHING ELSE
+    # ===============================
+    location / {
+
+        # Non GET → python
+        limit_except GET {
+            proxy_pass http://127.0.0.1:5000;
+        }
+
+        # GET → fake GUI
+        root /var/www;
+        try_files $uri /jasperserver/login.html;
+    }
+
+    # ===============================
+    # PROXY SETTINGS
+    # ===============================
+    proxy_request_buffering off;
+    proxy_buffering off;
+
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Remote-Port $remote_port;
+    proxy_set_header X-Local-IP $server_addr;
+    proxy_set_header X-Local-Port $server_port;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+}
