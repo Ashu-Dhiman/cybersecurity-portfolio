@@ -34,19 +34,20 @@ Controlled fake reverse shell simulation -Session capture for exploit research T
 ---
 
 ## 🧩 System Workflow 
-1.Attacker interacts with vulnerable endpoint. 
-2.Detection engine checks exploit signature.
-3.If CVE pattern matches → attacker redirected to fake shell.
-4.LLM dynamically generates shell responses. 
-5.Commands and outputs stored in RAG memory. 
-6.Analyst can override or inject custom responses. 
-7.Session stored for exploit behavior study.
+1. Attacker interacts with vulnerable endpoint. 
+2. Detection engine checks exploit signature.
+3. If CVE pattern matches → attacker redirected to fake shell.
+4. LLM dynamically generates shell responses. 
+5. Commands and outputs stored in RAG memory. 
+6. Analyst can override or inject custom responses. 
+7. Session stored for exploit behavior study.
 
 ---
 
 ## 🏗️ Architecture Overview 
 
 Attacker
+
 →  Vulnerable Endpoint (Simulated CVE-2025-55182) 
 →  Detection Engine → Fake Shell Interface
 →  LLM Response Engine → RAG Memory (Vector Store)
