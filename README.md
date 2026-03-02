@@ -1,9 +1,7 @@
 ## 🧠 TrapMind — AI-Driven Deception Honeypot 
 
 TrapMind is an intelligent web-based deception honeypot engineered specifically for controlled research and behavioral analysis of exploits related to CVE-2025-55182.This version is designed for localhost testing environments only and is not intended for public deployment.TrapMind detects exploit patterns, redirects attackers into a realistic AI-generated fake shell, and stores all interaction data using Retrieval Augmented Generation (RAG) for advanced behavioral analysis. 
-
 <img width="2245" height="1587" alt="image" src="https://github.com/user-attachments/assets/d7ac1fc8-8003-4bbd-806b-434a0be7ce79" /> 
-
 TrapMind is an intelligent web-based honeypot that detects attacker behavior and dynamically generates realistic fake shell interactions using Large Language Models (LLMs). The system captures attacker commands, generates contextual responses, and continuously learns through Retrieval Augmented Generation (RAG). TrapMind is designed for modern detection engineering, deception research, and autonomous security experimentation. 
 
 ---
@@ -46,25 +44,25 @@ Controlled fake reverse shell simulation -Session capture for exploit research T
 
 ---
 
-##🏗️ Architecture Overview 
+## 🏗️ Architecture Overview 
 
 Attacker
-→ Vulnerable Endpoint (Simulated CVE-2025-55182) 
-→ Detection Engine → Fake Shell Interface
-→ LLM Response Engine → RAG Memory (Vector Store)
-→ Log Storage
-→ Analyst Dashboard
+→  Vulnerable Endpoint (Simulated CVE-2025-55182) 
+→  Detection Engine → Fake Shell Interface
+→  LLM Response Engine → RAG Memory (Vector Store)
+→  Log Storage
+→  Analyst Dashboard
 
 ---
 
 ## 🛠️ Technology Stack 
 
-1.Python 
-2.FastAPI / Flask 
-3.Docker (localhost deployment) 
-4.Vector Database (FAISS / Chroma)
-5.LLM (OpenAI or local model) 
-6.Optional: Elasticsearch / Wazuh /Osqurey /Malcom (for PCAP)
+1. Python 
+2. FastAPI / Flask 
+3. Docker (localhost deployment) 
+4. Vector Database (FAISS / Chroma)
+5. LLM (OpenAI or local model) 
+6. Optional: Elasticsearch / Wazuh /Osqurey /Malcom (for PCAP)
 
 ---
 
